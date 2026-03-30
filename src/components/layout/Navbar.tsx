@@ -428,14 +428,16 @@ const Navbar = () => {
 
         {/* SEARCH */}
         <div className="flex-1 relative">
+          <div className="bg-gray-100 rounded-xl px-2 py-1 hover:bg-gray-200 transition">
           <input
             type="text"
             placeholder={placeholders[placeholderIndex]}
             className="w-full bg-gray-100 rounded-xl px-4 py-2 pl-10 
 focus:outline-none focus:bg-white focus:ring-2 focus:ring-black/10
-text-black placeholder-gray-500 transition-all duration-200"
+text-black placeholder-gray-500 transition-all duration-200 hover:bg-gray-200"
           />
-          <span className="absolute left-3 top-2.5 text-gray-400">🔍</span>
+          </div>
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
         </div>
       </div>
     </div>
