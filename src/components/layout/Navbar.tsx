@@ -344,7 +344,7 @@ const Navbar = () => {
       </div>
 
       {/* SEARCH SECTION */}
-      <div className="max-w-7xl mx-auto flex items-center gap-4 px-6 py-3">
+      <div className="w-full flex items-center gap-6 px-6 py-3">
         {/* CATEGORY */}
         <div className="relative">
           <button
