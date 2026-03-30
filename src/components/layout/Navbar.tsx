@@ -256,6 +256,20 @@ const Navbar = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const [search, setSearch] = useState("");
+
+  const products = [
+    { id: 1, name: "Monitor" },
+    { id: 2, name: "Gaming Monitor" },
+    { id: 3, name: "Monoblok" },
+    { id: 4, name: "Keyboard" },
+    { id: 5, name: "Mouse" },
+  ];
+
+  const filtered = products.filter((item) =>
+    item.name.toLowerCase().includes(search.toLowerCase()),
+  );
+
   const pathname = usePathname();
 
   const [open, setOpen] = useState(false);
@@ -429,15 +443,37 @@ const Navbar = () => {
         {/* SEARCH */}
         <div className="flex-1 relative">
           <div className="bg-gray-100 rounded-xl px-2 py-1 hover:bg-gray-200 transition">
-          <input
-            type="text"
-            placeholder={placeholders[placeholderIndex]}
-            className="w-full bg-gray-100 rounded-xl px-4 py-2 pl-10 
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder={placeholders[placeholderIndex]}
+              className="w-full bg-gray-100 rounded-xl px-4 py-2 pl-10 
 focus:outline-none focus:bg-white focus:ring-2 focus:ring-black/10
 text-black placeholder-gray-500 transition-all duration-200 hover:bg-gray-200"
-          />
+            />
           </div>
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+            🔍
+          </span>
+          {search && (
+            <div className="absolute top-full left-0 w-full bg-white shadow-xl rounded-xl mt-2 z-50 overflow-hidden">
+              {filtered.length > 0 ? (
+                filtered.map((item) => (
+                  <div
+                    key={item.id}
+                    className="px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer"
+                  >
+                    {item.name}
+                  </div>
+                ))
+              ) : (
+                <div className="px-4 py-2 text-gray-500 text-sm">
+                  Hiç zat tapylmady
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
