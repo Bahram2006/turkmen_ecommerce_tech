@@ -1,13 +1,15 @@
 import { useRouter } from "next/router";
 import { Product } from "@/types";
+import { useCart } from "@/hooks/useCart";
 
 const ProductCard = ({ product }: { product: Product }) => {
-    const router = useRouter();
+  const router = useRouter();
+  const { addToCart } = useCart();
   return (
-    <div 
-    onClick={() => router.push(`/product/${product.id}`)}
-    className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 p-4 cursor-pointer group">
-      
+    <div
+      onClick={() => router.push(`/product/${product.id}`)}
+      className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 p-4 cursor-pointer group"
+    >
       {/* IMAGE */}
       <div className="bg-gray-100 rounded-xl p-4 flex items-center justify-center">
         <img
@@ -23,16 +25,19 @@ const ProductCard = ({ product }: { product: Product }) => {
           {product.name}
         </h2>
 
-        <p className="text-lg font-bold text-black">
-          {product.price} TMT
-        </p>
+        <p className="text-lg font-bold text-black">{product.price} TMT</p>
       </div>
 
       {/* BUTTON */}
-      <button className="mt-4 w-full bg-black text-white py-2 rounded-lg text-sm hover:bg-red-500 transition">
+      <button
+        onClick={(e) => {
+          e.stopPropagation(); // detail page gitmez
+          addToCart(product);
+        }}
+        className="mt-4 w-full bg-black text-white py-2 rounded-lg text-sm hover:bg-red-500 transition"
+      >
         Sebede goş
       </button>
-
     </div>
   );
 };
