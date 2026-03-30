@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const navLinks = [
   { name: "Biz barada", href: "/about" },
@@ -242,6 +242,27 @@ const languages = [
 ];
 
 const Navbar = () => {
+
+  const placeholders = [
+  "Monitor",
+  "Monoblok",
+  "Case",
+  "Gaming Monitor",
+  "SSD",
+];
+
+  const [placeholderIndex, setPlaceholderIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() =>{
+      setPlaceholderIndex((prev) =>
+      prev === placeholders.length -1 ? 0 : prev + 1
+    );
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const pathname = usePathname();
 
   const [open, setOpen] = useState(false);
@@ -416,7 +437,7 @@ const Navbar = () => {
         <div className="flex-1 relative">
           <input
             type="text"
-            placeholder="Haryt gözle"
+            placeholder={placeholders[placeholderIndex]}
             className="w-full border rounded-lg px-4 py-2 pl-10 focus:outline-none focus:border-black"
           />
           <span className="absolute left-3 top-2.5 text-gray-400">🔍</span>
