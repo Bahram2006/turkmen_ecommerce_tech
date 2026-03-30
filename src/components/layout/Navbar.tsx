@@ -244,6 +244,41 @@ const languages = [
 const Navbar = () => {
   const placeholders = ["Monitor", "Monoblok", "Case", "Gaming Monitor", "SSD"];
 
+  const [placeholder, setPlaceholder] = useState("");
+  const [wordIndex, setWordIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const words = ["Monitor", "Monoblok", "Game Monitor", "Case"];
+
+  useEffect(() => {
+    const currentWord = words[wordIndex];
+
+    let speed = isDeleting ? 50 : 100;
+
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        setPlaceholder(currentWord.substring(0, charIndex + 1));
+        setCharIndex((prev) => prev + 1);
+
+        if (charIndex === currentWord.length) {
+          setIsDeleting(true);
+          speed = 1000; // biraz garaş
+        }
+      } else {
+        setPlaceholder(currentWord.substring(0, charIndex - 1));
+        setCharIndex((prev) => prev - 1);
+
+        if (charIndex === 0) {
+          setIsDeleting(false);
+          setWordIndex((prev) => (prev + 1) % words.length);
+        }
+      }
+    }, speed);
+
+    return () => clearTimeout(timeout);
+  }, [charIndex, isDeleting, wordIndex]);
+
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
 
   useEffect(() => {
@@ -259,11 +294,30 @@ const Navbar = () => {
   const [search, setSearch] = useState("");
 
   const products = [
-    { id: 1, name: "Monitor" },
-    { id: 2, name: "Gaming Monitor" },
-    { id: 3, name: "Monoblok" },
-    { id: 4, name: "Keyboard" },
-    { id: 5, name: "Mouse" },
+    {
+      id: 1,
+      name: "Gaming Monitor",
+      price: 4500,
+      image: "/icons/gaming-monitor.png",
+    },
+    {
+      id: 2,
+      name: "Office Monitor",
+      price: 3200,
+      image: "/icons/monitor.png",
+    },
+    {
+      id: 3,
+      name: "Monoblok",
+      price: 7000,
+      image: "/icons/monoblok.png",
+    },
+    {
+      id: 4,
+      name: "Keyboard",
+      price: 500,
+      image: "/icons/keyboard.png",
+    },
   ];
 
   const filtered = products.filter((item) =>
@@ -447,7 +501,7 @@ const Navbar = () => {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder={placeholders[placeholderIndex]}
+              placeholder={placeholder}
               className="w-full bg-gray-100 rounded-xl px-4 py-2 pl-10 
 focus:outline-none focus:bg-white focus:ring-2 focus:ring-black/10
 text-black placeholder-gray-500 transition-all duration-200 hover:bg-gray-200"
@@ -457,18 +511,33 @@ text-black placeholder-gray-500 transition-all duration-200 hover:bg-gray-200"
             🔍
           </span>
           {search && (
-            <div className="absolute top-full left-0 w-full bg-white shadow-xl rounded-xl mt-2 z-50 overflow-hidden">
+            <div className="absolute top-full left-0 w-full bg-white shadow-2xl rounded-2xl mt-2 z-50 overflow-hidden border">
               {filtered.length > 0 ? (
                 filtered.map((item) => (
                   <div
                     key={item.id}
-                    className="px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer"
+                    className="flex items-center gap-3 px-4 py-3 hover:bg-gray-100 hover:scale-[1.01] cursor-pointer transition duration-200"
                   >
-                    {item.name}
+                    {/* IMAGE */}
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-12 h-12 object-contain"
+                    />
+
+                    {/* INFO */}
+                    <div className="flex flex-col">
+                      <span className="text-sm font-semibold text-gray-800">
+                        {item.name}
+                      </span>
+                      <span className="text-xs text-gray-500">
+                        {item.price} TMT
+                      </span>
+                    </div>
                   </div>
                 ))
               ) : (
-                <div className="px-4 py-2 text-gray-500 text-sm">
+                <div className="px-4 py-3 text-gray-500 text-sm">
                   Hiç zat tapylmady
                 </div>
               )}
