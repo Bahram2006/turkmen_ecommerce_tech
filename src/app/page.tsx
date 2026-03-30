@@ -1,5 +1,6 @@
 import ProductGrid from "@/components/product/ProductGrid";
 import { products } from "@/data/products";
+import HeroSlider from "@/components/ui/HeroSlider";
 
 export default function Home() {
   return (
@@ -25,24 +26,7 @@ export default function Home() {
       </div>
 
       {/* 🎬 BIG SLIDER (FAKE FOR NOW) */}
-      <div className="bg-white border rounded-2xl p-70 shadow-md flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold mb-2">
-            RTX Gaming Setup
-          </h2>
-          <p className="text-gray-500 mb-4">
-            High performance PC & accessories
-          </p>
-          <button className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">
-            Gör
-          </button>
-        </div>
-
-        <img
-          src="/icons/gaming-monitor.png"
-          className="w-32"
-        />
-      </div>
+      <HeroSlider />
 
       {/* 🧩 4 SMALL CARDS */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
