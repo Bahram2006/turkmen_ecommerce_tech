@@ -63,7 +63,7 @@ const categories = [
       { name: "Oyun ucin kontrollerler", icon: "/icons/" },
       { name: "Wideo oyunlary", icon: "/icons/" },
       { name: "Dok stansiyalar we HUB-lar", icon: "/icons/" },
-    ]
+    ],
   },
   {
     name: "TOPLAYJYLAR",
@@ -74,7 +74,7 @@ const categories = [
       { name: "Fles toplayjy (USB)", icon: "/icons/" },
       { name: "Yat karty (SD)", icon: "/icons/" },
       { name: "Kartriderler", icon: "/icons/" },
-    ]
+    ],
   },
   {
     name: "MONOBLOK WE PK",
@@ -82,7 +82,7 @@ const categories = [
     sub: [
       { name: "Monoblokler", icon: "/icons/" },
       { name: "Brend kompyuterler", icon: "/icons/" },
-    ]
+    ],
   },
   {
     name: "NOUTBUKLAR WE BEYLEKILER",
@@ -98,7 +98,7 @@ const categories = [
       { name: "Ekranlar", icon: "/icons/" },
       { name: "Klawiaturalar", icon: "/icons/" },
       { name: "Klawiatura ucin nakleykalar", icon: "/icons/" },
-    ]
+    ],
   },
   {
     name: "MOBIL PERIFERIYALARY",
@@ -111,7 +111,7 @@ const categories = [
       { name: "Sumkalar we keysler", icon: "/icons/" },
       { name: "Arassalayjy serisdeler", icon: "/icons/" },
       { name: "Durli mobil pereferiyalary", icon: "/icons/" },
-    ]
+    ],
   },
   {
     name: "PRINTERLER WE BEYLEKILER",
@@ -128,7 +128,7 @@ const categories = [
       { name: "Laminatorlar", icon: "/icons/" },
       { name: "Kanselyariya", icon: "/icons/" },
       { name: "SArp edilyan harytlar", icon: "/icons/" },
-    ]
+    ],
   },
   {
     name: "TOR ENJAMLARY",
@@ -140,7 +140,7 @@ const categories = [
       { name: "Swicler, konwerterler we beylekiler", icon: "/icons/" },
       { name: "Tor kabeli", icon: "/icons/" },
       { name: "Testerler we guralalr", icon: "/icons/" },
-    ]
+    ],
   },
   {
     name: "HOWPSUZLYK ULGAMY",
@@ -148,7 +148,7 @@ const categories = [
     sub: [
       { name: "Gozegcilik kameralary", icon: "/icons/" },
       { name: "Elektron gulplar", icon: "/icons/" },
-    ]
+    ],
   },
   {
     name: "AWTOMATIZASIYA",
@@ -160,7 +160,7 @@ const categories = [
       { name: "Pul sanayjylar", icon: "/icons/" },
       { name: "Pul gutusy", icon: "/icons/" },
       { name: "Sarp edilyan harytlar", icon: "/icons/" },
-    ]
+    ],
   },
   {
     name: "TOK SAZLAYJYLAR WE UPS",
@@ -170,7 +170,7 @@ const categories = [
       { name: "Tok sazlayjylar", icon: "/icons/" },
       { name: "UPS ucin batareyler", icon: "/icons/" },
       { name: "UPS ucin beylekiler", icon: "/icons/" },
-    ]
+    ],
   },
   {
     name: "MEBELLER",
@@ -178,7 +178,7 @@ const categories = [
     sub: [
       { name: "Kompyuter kreslolary", icon: "/icons/" },
       { name: "Kompyuter stollary", icon: "/icons/" },
-    ]
+    ],
   },
   {
     name: "HOJALYK HARYTLARY",
@@ -199,7 +199,7 @@ const categories = [
       { name: "Blenderler", icon: "/icons/" },
       { name: "Et uweyji", icon: "/icons/" },
       { name: "Terezi", icon: "/icons/" },
-    ]
+    ],
   },
   {
     name: "GOZELLIK WE SAGLYK",
@@ -214,7 +214,7 @@ const categories = [
       { name: "Massajorlar", icon: "/icons/" },
       { name: "Elektrik skuterler", icon: "/icons/" },
       { name: "Gozellik we saglyk ucin", icon: "/icons/" },
-    ]
+    ],
   },
   {
     name: "BASGALAR",
@@ -231,7 +231,7 @@ const categories = [
       { name: "Elektrik uzaldyjylar we rozetkalar", icon: "/icons/" },
       { name: "Gurallar", icon: "/icons/" },
       { name: "Basgalar", icon: "/icons/" },
-    ]
+    ],
   },
 ];
 
@@ -365,7 +365,7 @@ const Navbar = () => {
                   <div
                     key={cat.name}
                     onMouseEnter={() => setHovered(index)}
-                    className="flex items-center gap-3 px-4 py-2 rounded-lg cursor-pointer hover:bg-red-50"
+                    className="flex items-center gap-3 px-4 py-2 rounded-lg cursor-pointer hover:bg-red-50 transition-all duration-200"
                   >
                     <img src={cat.icon} className="w-6 h-6" />
                     <span className="text-sm font-semibold text-gray-800">
@@ -377,19 +377,33 @@ const Navbar = () => {
 
               {/* RIGHT ONLY WHEN HOVER */}
               {hovered !== null && (
-                <div className="absolute top-0 left-full ml-1 w-64 bg-gray-50 border shadow-lg rounded-xl p-3">
+                <div
+                  className="
+      absolute top-0 left-full ml-2 w-64
+      bg-white border border-gray-100
+      rounded-2xl
+      shadow-[0_8px_30px_rgba(0,0,0,0.08)]
+      py-2
+      transition-all duration-200
+    "
+                >
                   {categories[hovered].sub.map((item) => (
                     <div
                       key={item.name}
-                      className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-gray-700 hover:text-red-500 cursor-pointer"
+                      className="flex items-center gap-3
+          px-4 py-2.5
+          text-sm font-medium text-gray-700
+          hover:bg-gray-50 hover:text-black
+          cursor-pointer
+          transition-all duration-150"
                     >
                       <img
                         src={item.icon}
                         alt={item.name}
-                        className="w-6 h-6 object-contain"
+                        className="w-5 h-5 object-contain opacity-80"
                       />
 
-                      <span>{item.name}</span>
+                      <span className="flex-1">{item.name}</span>
                     </div>
                   ))}
                 </div>
