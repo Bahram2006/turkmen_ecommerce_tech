@@ -1,8 +1,12 @@
+import { useRouter } from "next/router";
 import { Product } from "@/types";
 
 const ProductCard = ({ product }: { product: Product }) => {
+    const router = useRouter();
   return (
-    <div className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 p-4 cursor-pointer group">
+    <div 
+    onClick={() => router.push(`/product/${product.id}`)}
+    className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 p-4 cursor-pointer group">
       
       {/* IMAGE */}
       <div className="bg-gray-100 rounded-xl p-4 flex items-center justify-center">
