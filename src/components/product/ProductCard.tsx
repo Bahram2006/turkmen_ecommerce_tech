@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { Product } from "@/types";
-import { useCart } from "@/hooks/useCart";
+import { useCart } from "@/context/CartContext";
 
 const ProductCard = ({ product }: { product: Product }) => {
   const router = useRouter();
